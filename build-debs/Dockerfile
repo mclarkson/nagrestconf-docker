@@ -14,12 +14,7 @@ RUN mkdir -p /build && \
     cd /build && \
     git clone https://github.com/mclarkson/nagrestconf.git && \
     cd /build/nagrestconf/SOURCES/nagrestconf-1 && \
-    cp -a debian.docker/ debian.stretch && \
-    cd debian.stretch && \
-    sed -i 's/php5 [^,]*/php/;s/php5/php/;' control && \
-    sed -i 's/php5/php7.0/' postinst && \
-    cd .. && \
-    ln -s debian.stretch/ debian && \
+    ln -s debian.docker/ debian && \
     debuild -I -i -us -uc
 
 COPY pause.c /tmp/
