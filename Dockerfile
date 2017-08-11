@@ -9,12 +9,13 @@ ARG DEBIAN_FRONTEND
 RUN eatmydata apt-get install -o APT::Install-Recommends="0" -y \
         apt-transport-https \
         gdebi-core \
+        sudo \
         libapache2-mod-php7.0 && \
     gdebi -n /tmp/nagrestconf_1.174.7_all.deb && \
     dpkg -i /tmp/nagrestconf-backup-plugin_1.174.7_all.deb \
         /tmp/nagrestconf-hosts-bulktools-plugin_1.174.7_all.deb \
         /tmp/nagrestconf-services-bulktools-plugin_1.174.7_all.deb \
-        /tmp/nagrestconf-services-plugin_1.174.7_all.deb
+        /tmp/nagrestconf-services-plugin_1.174.7_all.deb # 1
 
 RUN a2dismod mpm_event && \
     a2enmod mpm_prefork
