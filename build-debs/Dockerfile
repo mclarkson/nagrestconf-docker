@@ -15,7 +15,7 @@ RUN mkdir -p /build && \
     git clone https://github.com/mclarkson/nagrestconf.git && \
     cd /build/nagrestconf/SOURCES/nagrestconf-1 && \
     ln -s debian.docker/ debian && \
-    debuild -I -i -us -uc
+    debuild -I -i -us -uc # 2
 
 COPY pause.c /tmp/
 

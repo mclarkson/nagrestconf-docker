@@ -19,9 +19,13 @@ RUN eatmydata apt-get install -o APT::Install-Recommends="0" -y \
 RUN a2dismod mpm_event && \
     a2enmod mpm_prefork
 
-ENV APACHE_ARGUMENTS="-DFOREGROUND"
+#ENV APACHE_ARGUMENTS="-DFOREGROUND"
 
-ENTRYPOINT ["apache2ctl","start"]
+#ENTRYPOINT ["apache2ctl","start"]
+
+COPY init.sh /sbin/init.sh
+
+ENTRYPOINT ["/sbin/init.sh"]
 
 RUN sed -i '/^start)/,/^stop/ {s/$HTTPD/exec $HTTPD/}' /usr/sbin/apache2ctl
 

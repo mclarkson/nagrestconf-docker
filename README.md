@@ -11,7 +11,6 @@ exit
 ```
 docker run --name nagrestconf --volumes-from nagios -d -p 8080:80 nagrestconf
 docker exec -it nagrestconf /bin/bash
-touch /etc/nagios/htpasswd.users
-htpasswd /etc/nagios/htpasswd.users nagrestconfadmin
+htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
 exit
 ```
