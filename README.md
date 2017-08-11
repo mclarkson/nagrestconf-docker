@@ -17,13 +17,21 @@ Run the nagrestconf container:
 
 ```
 docker run -d -p 8880:80 \
+  -v /tmp \
   --name nagrestconf \
   --volumes-from nagios \
   --env-file quantumobject_docker-nagios.env \
   nagrestconf
 ```
 
-Set the nagrestconf password
+The `/tmp` directory is exported as a volume so another container can check it
+for the file, `nagios_restart_requst`, which is written by nagrestconf. The
+volumes from the nagios container, `/usr/local/nagios`, are mounted at the
+same location. The environment file, `quantumobject_docker-nagios.env`,
+contains all the settings required by the quantumobject/docker-nagios docker
+image.
+
+Set up the nagrestconf container fully:
 
 ```
 docker exec -it nagrestconf /bin/bash
@@ -33,4 +41,10 @@ nagrestconf_install -n -q -o
 slc_configure --folder=local
 htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
 exit
+```
+
+Finally start the restart container:
+
+```
+blurp
 ```
