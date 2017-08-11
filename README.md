@@ -16,11 +16,8 @@ exit
 Run the nagrestconf container:
 
 ```
-docker run -d -p 8880:80 \
-  -v /tmp \
-  --name nagrestconf \
-  --volumes-from nagios \
-  --env-file quantumobject_docker-nagios.env \
+docker run -d -p 8880:80 -v /tmp --name nagrestconf \
+  --volumes-from nagios --env-file quantumobject_docker-nagios.env \
   nagrestconf
 ```
 
@@ -40,11 +37,14 @@ useradd -u 999 -g 999 nagios -r
 nagrestconf_install -n -q -o
 slc_configure --folder=local
 htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
+docker restart nagrestconf
 exit
 ```
 
 Finally start the restart container:
 
 ```
-blurp
+docker run -d --name nagrestconf-restarter --volumes-from nagrestconf nagrestconf-restarter
 ```
+
+
