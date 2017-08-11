@@ -2,6 +2,10 @@
 
 Run [nagrestconf](https://github.com/mclarkson/nagrestconf) in a docker container.
 
+Two containers are created here, mclarkson/nagrestconf and mclarkson/nagrestconf-restarter.
+
+Use a compatible nagios container such as [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios).
+
 ## Installation
 
 Run a nagios docker container, for instance [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios):
@@ -16,17 +20,10 @@ exit
 Run the nagrestconf container:
 
 ```
-docker run -d -p 8880:80 -v /tmp --name nagrestconf \
+docker run -d -p 8880:80 --name nagrestconf -v /tmp \
   --volumes-from nagios --env-file quantumobject_docker-nagios.env \
   mclarkson/nagrestconf
 ```
-
-The `/tmp` directory is exported as a volume so another container can check it
-for the file, `nagios_restart_requst`, which is written by nagrestconf. The
-volumes from the nagios container, `/usr/local/nagios`, are mounted at the
-same location. The environment file, `quantumobject_docker-nagios.env`,
-contains all the settings required by the quantumobject/docker-nagios docker
-image.
 
 Set up the nagrestconf container fully:
 
