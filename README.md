@@ -4,7 +4,7 @@ Run [nagrestconf](https://github.com/mclarkson/nagrestconf) in a docker containe
 
 ## Installation
 
-Run a nagios docker container, for instance:
+Run a nagios docker container, for instance [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios/blob/master/Dockerfile):
 
 ```
 docker run -d --name nagios -v /usr/local/nagios -p 25 -p 80 quantumobject/docker-nagios
@@ -18,7 +18,7 @@ Run the nagrestconf container:
 ```
 docker run -d -p 8880:80 -v /tmp --name nagrestconf \
   --volumes-from nagios --env-file quantumobject_docker-nagios.env \
-  nagrestconf
+  mclarkson/nagrestconf
 ```
 
 The `/tmp` directory is exported as a volume so another container can check it
@@ -44,7 +44,15 @@ exit
 Finally start the restart container:
 
 ```
-docker run -d --name nagrestconf-restarter --volumes-from nagrestconf nagrestconf-restarter
+docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/nagrestconf-restarter
 ```
 
+## Build
+
+To build, recompiling nagrestconf from github mclarkson/nagrestconf and remaking
+nagrestconf and nagrestconf-restarter images, use:
+
+```
+bash build.sh
+```
 
