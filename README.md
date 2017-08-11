@@ -8,7 +8,7 @@ Use a compatible nagios container such as [QuantumObject/docker-nagios](https://
 
 ## Installation
 
-Run a nagios docker container, for instance [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios):
+Run a compatible nagios docker container, for instance [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios):
 
 ```
 docker run -d --name nagios -v /usr/local/nagios -p 25 -p 80 quantumobject/docker-nagios
