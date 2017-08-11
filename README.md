@@ -4,7 +4,7 @@ Run [nagrestconf](https://github.com/mclarkson/nagrestconf) in a docker containe
 
 ## Installation
 
-Run a nagios docker container, for instance [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios/blob/master/Dockerfile):
+Run a nagios docker container, for instance [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios):
 
 ```
 docker run -d --name nagios -v /usr/local/nagios -p 25 -p 80 quantumobject/docker-nagios
