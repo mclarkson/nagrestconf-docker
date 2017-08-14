@@ -4,7 +4,8 @@ Run [nagrestconf](https://github.com/mclarkson/nagrestconf) in a docker containe
 
 Two containers are created here, mclarkson/nagrestconf and mclarkson/nagrestconf-restarter.
 
-Use a compatible nagios container such as [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios).
+Use a compatible nagios container such as [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios)
+or [JasonRivers/Docker-Nagios](https://github.com/JasonRivers/Docker-Nagios).
 
 ## Installation
 
