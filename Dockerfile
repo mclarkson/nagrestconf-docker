@@ -20,20 +20,9 @@ RUN eatmydata apt-get install -o APT::Install-Recommends="0" -y \
 RUN a2dismod mpm_event && \
     a2enmod mpm_prefork
 
-#ENV APACHE_ARGUMENTS="-DFOREGROUND"
-
-#ENTRYPOINT ["apache2ctl","start"]
-
 COPY init.sh /sbin/init.sh
 
 ENTRYPOINT ["/sbin/init.sh"]
 
 RUN sed -i '/^start)/,/^stop/ {s/$HTTPD/exec $HTTPD/}' /usr/sbin/apache2ctl
-
-# PORTS 80
-
-#RUN nagrestconf_install -a && \
-#    slc_configure --folder=local && \
-#    sed -i 's/check_external_commands=0/check_external_commands=1/g' /etc/nagios3/nagios.cfg \
-#    sed -i 's/enable_embedded_perl=1/enable_embedded_perl=0/g' /etc/nagios3/nagios.cfg \
 
