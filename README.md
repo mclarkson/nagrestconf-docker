@@ -12,7 +12,8 @@ or [JasonRivers/Docker-Nagios](https://github.com/JasonRivers/Docker-Nagios).
 
 ## Running with QuantumObject/docker-nagios
 
-See [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios):
+Start the Nagios 4.x container
+( See [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios)):
 
 ```
 docker run -d --name nagios -v /usr/local/nagios -p 25 -p 8080:80 quantumobject/docker-nagios
@@ -21,7 +22,7 @@ htpasswd /usr/local/nagios/etc/htpasswd.users nagiosadmin
 exit
 ```
 
-Run the nagrestconf container:
+Start the nagrestconf container:
 
 ```
 wget https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/quantumobject_docker-nagios.env
@@ -30,7 +31,7 @@ docker run -d -p 8880:80 --name nagrestconf -v /tmp \
   mclarkson/nagrestconf
 ```
 
-Set up the nagrestconf container fully:
+Set up the nagrestconf container:
 
 ```
 docker exec -it nagrestconf /bin/bash
@@ -43,7 +44,7 @@ exit
 docker restart nagrestconf
 ```
 
-Finally start the restart container:
+Finally start the restart container (it restarts nagios using the `nagios.cmd` pipe):
 
 ```
 docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/nagrestconf-restarter
@@ -56,13 +57,14 @@ With the above setup:
 
 ## Running with JasonRivers/Docker-Nagios
 
-See [JasonRivers/Docker-Nagios](https://github.com/JasonRivers/Docker-Nagios):
+Start the Nagios 4.x container
+(See [JasonRivers/Docker-Nagios](https://github.com/JasonRivers/Docker-Nagios)):
 
 ```
 docker run -d --name nagios4 -p 8080:80 -v /opt/nagios jasonrivers/nagios:latest
 ```
 
-Run the nagrestconf container:
+Start the nagrestconf container:
 
 ```
 wget https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/jasonrivers_docker-nagios.env
@@ -71,7 +73,7 @@ docker run -d -p 8880:80 --name nagrestconf -v /tmp \
   mclarkson/nagrestconf
 ```
 
-Set up the nagrestconf container fully:
+Set up the nagrestconf container:
 
 ```
 docker exec -it nagrestconf /bin/bash
@@ -85,7 +87,7 @@ exit
 docker restart nagrestconf
 ```
 
-Finally start the restart container:
+Finally start the restart container (it restarts nagios using the `nagios.cmd` pipe):
 
 ```
 docker run -d --name nagrestconf-restarter \
