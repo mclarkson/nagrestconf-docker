@@ -7,7 +7,7 @@ Run [nagrestconf](https://github.com/mclarkson/nagrestconf) in a docker containe
 Run a nagios docker container, for instance [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios):
 
 ```
-docker run -d --name nagios -v /usr/local/nagios -p 25 -p 80 quantumobject/docker-nagios
+docker run -d --name nagios -v /usr/local/nagios -p 25 -p 8080:80 quantumobject/docker-nagios
 docker exec -it nagios /bin/bash
 htpasswd /usr/local/nagios/etc/htpasswd.users nagiosadmin
 exit
@@ -46,6 +46,11 @@ Finally start the restart container:
 ```
 docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/nagrestconf-restarter
 ```
+
+With the above setup:
+
+* Nagios is at http:/host:8080/nagios
+* Nagrestconf is at http:/host:8880/nagrestconf
 
 ## Build
 
