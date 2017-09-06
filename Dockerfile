@@ -25,4 +25,6 @@ COPY init.sh /sbin/init.sh
 ENTRYPOINT ["/sbin/init.sh"]
 
 RUN sed -i '/^start)/,/^stop/ {s/$HTTPD/exec $HTTPD/}' /usr/sbin/apache2ctl
+RUN sed -i 's/Listen 80/Listen 8080/' /etc/apache2/ports.conf
+RUN sed -i 's#https://127.0.0.1/rest#https://127.0.0.1:8080/rest#' /etc/nagrestconf/nagrestconf.ini
 
