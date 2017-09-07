@@ -1,0 +1,69 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nagios-nagrestconf
+spec:
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: nagrestconf
+    spec:
+      containers:
+
+      - name: nagios
+        image: quantumobject/docker-nagios
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nagios-dir
+          mountPath: /usr/local/nagios
+
+      - name: nagrestconf
+        image: mclarkson/nagrestconf
+        ports:
+        - containerPort: 80
+        env:
+        - name: NAGCTL_NAG_DIR
+          value: /usr/local/nagios/etc
+        - name: NAGCTL_NAG_OBJ_DIR
+          value: /usr/local/nagios/etc/objects
+        - name: NAGCTL_NAG_CONFIG
+          value: /usr/local/nagios/etc/nagios.cfg
+        - name: NAGCTL_COMMANDFILE
+          value: /usr/local/nagios/var/rw/nagios.cmd
+        - name: NAGCTL_NAGIOSBIN
+          value: /usr/local/nagios/bin/nagios
+        - name: NAGCTL_WWWUSER
+          value: www-data
+        volumeMounts:
+        - name: nagios-dir
+          mountPath: /usr/local/nagios
+        - name: nagrestconf-tmp-dir # tmp dir is shared with nagrestconf-restarter
+          mountPath: /tmp
+
+      - name: nagrestconf-nagios-restarter
+        image: mclarkson/nagrestconf-restarter
+        volumeMounts:
+        - name: nagrestconf-tmp-dir # restarter looks for file written by nagrestconf in /tmp
+          mountPath: /tmp
+        - name: nagios-dir # just for nagios socket
+          mountPath: /usr/local/nagios
+
+      initContainers:
+
+      # Copy data dir to mount
+      - name: nagios-one-time-data-copy
+        image: quantumobject/docker-nagios
+        volumeMounts:
+        - name: nagios-dir
+          mountPath: /nagios
+        command: ['sh', '-c', 'test -e /nagios/bin || cp -a /usr/local/nagios/* /nagios/']
+
+      volumes:
+      - name: nagios-dir
+        emptyDir: {}
+      - name: nagrestconf-tmp-dir
+        emptyDir: {}
+

@@ -1,0 +1,24 @@
+# Create the pod
+kubectl create -n nagios-nrc -f nagios-nagrestconf.yml
+
+# Get a console on the nagrestconf container
+name=$(kubectl -n nagios-nrc get pods -l app=nagrestconf -o jsonpath="{.items[0].metadata.name}")
+kubectl -n nagios-nrc exec -ti $name -c nagrestconf bash
+
+# Make initial config and set the password
+nagrestconf_install -n
+slc_configure --folder=local
+htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
+exit
+
+# Get a console on the nagios container
+kubectl -n nagios-nrc exec -ti $name -c nagios bash
+
+# Set the password
+htpasswd /usr/local/nagios/etc/htpasswd.users nagiosadmin
+exit
+
+# Use port-forward to test
+kubectl -n nagios-nrc port-forward $name 8880:80 8080:8080
+
+

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nagios
+  labels:
+    app: nagrestconf
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: nagrestconf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nagrestconf
+  labels:
+    app: nagrestconf
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: nagrestconf
