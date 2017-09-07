@@ -50,8 +50,8 @@ docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/
 
 With the above setup:
 
-* Nagios is at http:/host:8080/nagios
-* Nagrestconf is at http:/host:8880/nagrestconf
+* Nagios is at http://localhost:8080/nagios
+* Nagrestconf is at http://localhost:8880/nagrestconf
 
 ## Running with JasonRivers/Docker-Nagios
 
@@ -93,8 +93,8 @@ docker run -d --name nagrestconf-restarter \
 
 With the above setup:
 
-* Nagios is at http:/host:8080/nagios
-* Nagrestconf is at http:/host:8880/nagrestconf
+* Nagios is at http://localhost:8080/nagios
+* Nagrestconf is at http://localhost:8880/nagrestconf
 
 ## Environment Variables
 
