@@ -65,7 +65,7 @@ cat >/etc/nagrestconf/nagrestconf.ini <<EnD
 ; Configuration file for nagrestconf
 
 ;resturl  = "https://127.0.0.1/rest"
-resturl  = ${NAGRESTCONF_INI_RESTURL:-"http://127.0.0.1/rest"}
+resturl  = ${NAGRESTCONF_INI_RESTURL:-"http://127.0.0.1:8080/rest"}
 folder[] = ${NAGRESTCONF_INI_FOLDER:-"local"}
 restuser = ${NAGRESTCONF_INI_RESTUSER:-"user"}
 restpass = ${NAGRESTCONF_INI_RESTPASS:-"pass"}

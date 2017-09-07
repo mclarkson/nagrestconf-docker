@@ -100,6 +100,37 @@ With the above setup:
 * Nagios is at http:/host:8080/nagios
 * Nagrestconf is at http:/host:8880/nagrestconf
 
+## Environment Variables
+
+```
+/etc/nagrestconf/csv2nag.conf    default value
+-----------------------------    ------------------------
+CSV2NAG_DCC                      0
+CSV2NAG_REMOTE_EXECUTOR          check_any
+CSV2NAG_FRESHNESS_CHECK_COMMAND  no-checks-received
+
+/etc/nagrestconf/nagctl.conf
+----------------------------
+NAGCTL_NAG_DIR                   /etc/nagios3
+NAGCTL_NAG_OBJ_DIR               \$NAG_DIR/objects
+NAGCTL_NAG_CONFIG                \$NAG_DIR/nagios.cfg
+NAGCTL_COMMANDFILE               /var/lib/nagios3/rw
+NAGCTL_NAGIOSBIN                 /usr/sbin/nagios3
+NAGCTL_CSV2NAG                   /usr/bin/csv2nag
+NAGCTL_WWWUSER                   www-data
+
+/etc/nagrestconf/nagrestconf.ini
+--------------------------------
+NAGRESTCONF_INI_RESTURL          http://127.0.0.1:8080/rest
+NAGRESTCONF_INI_FOLDER           local
+NAGRESTCONF_INI_RESTUSER         user
+NAGRESTCONF_INI_RESTPASS         pass
+
+/etc/nagrestconf/restart_nagios.conf (unused)
+---------------------------------------------
+RESTART_NAGIOS_CONF_NAG_INITD    nagios3 (unused)
+```
+
 ## Build
 
 To build, recompiling nagrestconf from github mclarkson/nagrestconf and remaking
