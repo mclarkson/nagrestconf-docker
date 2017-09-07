@@ -42,7 +42,7 @@ exit
 docker restart nagrestconf
 ```
 
-Finally start the restart container (it restarts nagios using the `nagios.cmd` pipe):
+Finally start the restart container:
 
 ```
 docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/nagrestconf-restarter
@@ -83,7 +83,7 @@ exit
 docker restart nagrestconf
 ```
 
-Finally start the restart container (it restarts nagios using the `nagios.cmd` pipe):
+Finally start the restart container:
 
 ```
 docker run -d --name nagrestconf-restarter \
