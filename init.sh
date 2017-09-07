@@ -87,4 +87,9 @@ EnD
 
 export APACHE_ARGUMENTS="-DFOREGROUND"
 
+# Edit sudoers and users
+groupadd -g 999 nagios
+useradd -u 999 -g 999 nagios -r
+nagrestconf_install -q -o
+
 exec apache2ctl start
