@@ -88,8 +88,10 @@ EnD
 export APACHE_ARGUMENTS="-DFOREGROUND"
 
 # Edit sudoers and users
-groupadd -g 999 nagios
-useradd -u 999 -g 999 nagios -r
+uid=$(stat /usr/local/nagios/etc --format %u)
+gid=$(stat /usr/local/nagios/etc --format %g)
+groupadd -g $uid nagios
+useradd -u $uid -g $gid nagios -r
 nagrestconf_install -q -o
 
 exec apache2ctl start

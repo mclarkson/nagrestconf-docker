@@ -35,9 +35,7 @@ Set up the nagrestconf container:
 
 ```
 docker exec -it nagrestconf /bin/bash
-groupadd -g 999 nagios
-useradd -u 999 -g 999 nagios -r
-nagrestconf_install -n -q -o
+nagrestconf_install -n
 slc_configure --folder=local
 htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
 exit
@@ -78,9 +76,7 @@ Set up the nagrestconf container:
 ```
 docker exec -it nagrestconf /bin/bash
 echo "PATH=\$PATH:/opt/nagios/bin">>/etc/bash.bashrc
-groupadd -g 1000 nagios
-useradd -u 999 -g 1000 nagios -r
-nagrestconf_install -n -q -o
+nagrestconf_install -n
 slc_configure --folder=local
 htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
 exit
