@@ -42,7 +42,7 @@ With the above setup:
 
 * Nagios is at http://localhost:8080/nagios<br>
   Default credentials: nagiosadmin / nagios
-* Nagrestconf is at http://localhost:8880/nagrestconf
+* Nagrestconf is at http://localhost:8880/nagrestconf<br>
   Default credentials: nagrestconfadmin / admin
 
 To change the nagrestconf default password:
