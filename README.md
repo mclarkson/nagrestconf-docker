@@ -98,14 +98,14 @@ Create the pod:
 ```
 wget https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/kubernetes/nagios-nagrestconf-allinone.yml
 
-kubectl create -n nagios-nrc -f nagios-nagrestconf-allinone.yml
+kubectl create -f nagios-nagrestconf-allinone.yml
 ```
 
 Get a console on the nagios container:
 ```
-name=$(kubectl -n nagios-nrc get pods -l app=nagrestconf -o jsonpath="{.items[0].metadata.name}")
+name=$(kubectl get pods -l app=nagrestconf -o jsonpath="{.items[0].metadata.name}")
 
-kubectl -n nagios-nrc exec -ti $name -c nagios bash
+kubectl exec -ti $name -c nagios bash
 ```
 
 Set the password:
@@ -116,7 +116,7 @@ exit
 
 Use port-forward to test:
 ```
-kubectl -n nagios-nrc port-forward $name 8880:80 8080:8080
+kubectl port-forward $name 8880:80 8080:8080
 ```
 
 With the above setup:
