@@ -41,10 +41,11 @@ docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/
 With the above setup:
 
 * Nagios is at http://localhost:8080/nagios<br>
-  default credentials: nagiosadmin / nagios
+  Default credentials: nagiosadmin / nagios
 * Nagrestconf is at http://localhost:8880/nagrestconf
+  Default credentials: nagrestconfadmin / admin
 
-To change the default password:
+To change the nagrestconf default password:
 
 ```
 docker exec -it nagrestconf /bin/bash
@@ -82,9 +83,10 @@ docker run -d --name nagrestconf-restarter \
 With the above setup:
 
 * Nagios is at http://localhost:8080/nagios
-* Nagrestconf is at http://localhost:8880/nagrestconf
+* Nagrestconf is at http://localhost:8880/nagrestconf<br>
+  Default credentials: nagrestconfadmin / admin
 
-To change the default password:
+To change the nagrestconf default password:
 
 ```
 docker exec -it nagrestconf /bin/bash
@@ -122,7 +124,8 @@ kubectl port-forward $name 8880:80 8080:8080
 With the above setup:
 
 * Nagios is at http://localhost:8080/nagios
-* Nagrestconf is at http://localhost:8880/nagrestconf
+* Nagrestconf is at http://localhost:8880/nagrestconf<br>
+  Default credentials: nagrestconfadmin / admin
 
 ## Running with Helm
 
