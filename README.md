@@ -26,6 +26,7 @@ Start the nagrestconf container:
 
 ```
 wget https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/quantumobject_docker-nagios.env
+
 docker run -d -p 8880:8080 --name nagrestconf -v /tmp \
   --volumes-from nagios --env-file quantumobject_docker-nagios.env \
   mclarkson/nagrestconf
@@ -64,6 +65,7 @@ Start the nagrestconf container:
 
 ```
 wget https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/jasonrivers_docker-nagios.env
+
 docker run -d -p 8880:8080 --name nagrestconf -v /tmp \
   --volumes-from nagios4 --env-file jasonrivers_docker-nagios.env \
   mclarkson/nagrestconf
@@ -94,7 +96,9 @@ exit
 
 Create the pod:
 ```
-kubectl create -n nagios-nrc -f nagios-nagrestconf.yml
+wget https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/kubernetes/nagios-nagrestconf-allinone.yml
+
+kubectl create -n nagios-nrc -f nagios-nagrestconf-allinone.yml
 ```
 
 Get a console on the nagios container:
