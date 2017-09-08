@@ -94,4 +94,13 @@ groupadd -g $uid nagios
 useradd -u $uid -g $gid nagios -r
 nagrestconf_install -q -o
 
+# One-time only
+[[ ! -e NAGCTL_NAG_DIR/repos ]] && {
+    nagpath=$(dirname $NAGCTL_NAGIOSBIN)
+    echo "PATH=\$PATH:$nagpath">>/etc/bash.bashrc
+    nagrestconf_install -n
+    slc_configure --folder=local
+    htpasswd -b -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin admin
+}
+
 exec apache2ctl start

@@ -31,17 +31,6 @@ docker run -d -p 8880:8080 --name nagrestconf -v /tmp \
   mclarkson/nagrestconf
 ```
 
-Set up the nagrestconf container:
-
-```
-docker exec -it nagrestconf /bin/bash
-nagrestconf_install -n
-slc_configure --folder=local
-htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
-exit
-docker restart nagrestconf
-```
-
 Finally start the restart container:
 
 ```
@@ -51,7 +40,16 @@ docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/
 With the above setup:
 
 * Nagios is at http://localhost:8080/nagios
+  default credentials: nagiosadmin / nagios
 * Nagrestconf is at http://localhost:8880/nagrestconf
+
+To change the default password:
+
+```
+docker exec -it nagrestconf /bin/bash
+htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
+exit
+```
 
 ## Running with JasonRivers/Docker-Nagios
 
@@ -71,18 +69,6 @@ docker run -d -p 8880:8080 --name nagrestconf -v /tmp \
   mclarkson/nagrestconf
 ```
 
-Set up the nagrestconf container:
-
-```
-docker exec -it nagrestconf /bin/bash
-echo "PATH=\$PATH:/opt/nagios/bin">>/etc/bash.bashrc
-nagrestconf_install -n
-slc_configure --folder=local
-htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
-exit
-docker restart nagrestconf
-```
-
 Finally start the restart container:
 
 ```
@@ -95,6 +81,14 @@ With the above setup:
 
 * Nagios is at http://localhost:8080/nagios
 * Nagrestconf is at http://localhost:8880/nagrestconf
+
+To change the default password:
+
+```
+docker exec -it nagrestconf /bin/bash
+htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
+exit
+```
 
 ## Environment Variables
 
