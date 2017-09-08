@@ -103,6 +103,8 @@ kubectl create -n nagios-nrc -f nagios-nagrestconf-allinone.yml
 
 Get a console on the nagios container:
 ```
+name=$(kubectl -n nagios-nrc get pods -l app=nagrestconf -o jsonpath="{.items[0].metadata.name}")
+
 kubectl -n nagios-nrc exec -ti $name -c nagios bash
 ```
 
