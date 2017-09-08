@@ -90,6 +90,36 @@ htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
 exit
 ```
 
+## Running with Kubernetes
+
+Create the pod:
+```
+kubectl create -n nagios-nrc -f nagios-nagrestconf.yml
+```
+
+Get a console on the nagios container:
+```
+kubectl -n nagios-nrc exec -ti $name -c nagios bash
+```
+
+Set the password:
+```
+htpasswd /usr/local/nagios/etc/htpasswd.users nagiosadmin
+exit
+```
+
+Use port-forward to test:
+```
+kubectl -n nagios-nrc port-forward $name 8880:80 8080:8080
+```
+
+With the above setup:
+
+* Nagios is at http://localhost:8080/nagios
+* Nagrestconf is at http://localhost:8880/nagrestconf
+
+## Running with Helm
+
 ## Environment Variables
 
 ```
