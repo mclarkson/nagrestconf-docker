@@ -39,7 +39,7 @@ docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/
 
 With the above setup:
 
-* Nagios is at http://localhost:8080/nagios
+* Nagios is at http://localhost:8080/nagios<br>
   default credentials: nagiosadmin / nagios
 * Nagrestconf is at http://localhost:8880/nagrestconf
 
