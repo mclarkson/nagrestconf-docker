@@ -118,7 +118,7 @@ exit
 
 Use port-forward to test:
 ```
-kubectl port-forward $name 8880:80 8080:8080
+kubectl port-forward $name 8080:80 8880:8080
 ```
 
 With the above setup:
