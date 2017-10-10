@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    #ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/ssl-redirect: "false"
+    kubernetes.io/ingress.class: nginx
+  labels:
+    app: nagrestconf
+  name: nagrestconf
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: nagios
+          servicePort: 80
+        path: /nagios
+      - backend:
+          serviceName: nagrestconf
+          servicePort: 80
+        path: /nagrestconf
