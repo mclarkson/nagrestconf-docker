@@ -127,6 +127,8 @@ With the above setup:
 * Nagrestconf is at http://localhost:8880/nagrestconf<br>
   Default credentials: nagrestconfadmin / admin
 
+Take a look in the `kubernetes/' directory to see service and ingress yaml examples.
+
 ## Running with Helm
 
 ## Environment Variables
