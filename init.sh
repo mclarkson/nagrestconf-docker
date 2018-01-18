@@ -88,9 +88,9 @@ EnD
 export APACHE_ARGUMENTS="-DFOREGROUND"
 
 # Edit sudoers and users
-uid=$(stat /usr/local/nagios/etc --format %u)
-gid=$(stat /usr/local/nagios/etc --format %g)
-groupadd -g $uid nagios
+uid=$(stat $NAGCTL_NAG_DIR --format %u)
+gid=$(stat $NAGCTL_NAG_DIR --format %g)
+groupadd -g $gid nagios
 useradd -u $uid -g $gid nagios -r
 nagrestconf_install -q -o
 
