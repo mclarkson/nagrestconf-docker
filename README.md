@@ -10,48 +10,6 @@ or [JasonRivers/Docker-Nagios](https://github.com/JasonRivers/Docker-Nagios).
 
 ## Installation
 
-## Running with QuantumObject/docker-nagios
-
-Start the Nagios 4.x container
-( See [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios)):
-
-```
-docker run -d --name nagios -v /usr/local/nagios -p 25 -p 8080:80 quantumobject/docker-nagios
-docker exec -it nagios /bin/bash
-htpasswd /usr/local/nagios/etc/htpasswd.users nagiosadmin
-exit
-```
-
-Start the nagrestconf container:
-
-```
-wget https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/quantumobject_docker-nagios.env
-
-docker run -d -p 8880:8080 --name nagrestconf -v /tmp \
-  --volumes-from nagios --env-file quantumobject_docker-nagios.env \
-  mclarkson/nagrestconf
-```
-
-Finally start the restart container:
-
-```
-docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/nagrestconf-restarter
-```
-
-With the above setup:
-
-* Nagios is at http://localhost:8080/nagios
-* Nagrestconf is at http://localhost:8880/nagrestconf<br>
-  Default credentials: nagrestconfadmin / admin
-
-To change the nagrestconf default password:
-
-```
-docker exec -it nagrestconf /bin/bash
-htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
-exit
-```
-
 ## Running with JasonRivers/Docker-Nagios
 
 Start the Nagios 4.x container
@@ -83,6 +41,50 @@ With the above setup:
 
 * Nagios is at http://localhost:8080/nagios<br>
   Default credentials: nagiosadmin / nagios
+* Nagrestconf is at http://localhost:8880/nagrestconf<br>
+  Default credentials: nagrestconfadmin / admin
+
+To change the nagrestconf default password:
+
+```
+docker exec -it nagrestconf /bin/bash
+htpasswd -c /etc/nagrestconf/nagrestconf.users nagrestconfadmin
+exit
+```
+
+## Running with QuantumObject/docker-nagios
+
+**QuantumObject/docker-nagios has gone! - leaving this section here in case it returns**
+
+Start the Nagios 4.x container
+( See [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios)):
+
+```
+docker run -d --name nagios -v /usr/local/nagios -p 25 -p 8080:80 quantumobject/docker-nagios
+docker exec -it nagios /bin/bash
+htpasswd /usr/local/nagios/etc/htpasswd.users nagiosadmin
+exit
+```
+
+Start the nagrestconf container:
+
+```
+wget https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/quantumobject_docker-nagios.env
+
+docker run -d -p 8880:8080 --name nagrestconf -v /tmp \
+  --volumes-from nagios --env-file quantumobject_docker-nagios.env \
+  mclarkson/nagrestconf
+```
+
+Finally start the restart container:
+
+```
+docker run -d --name nagrestconf-restarter --volumes-from nagrestconf mclarkson/nagrestconf-restarter
+```
+
+With the above setup:
+
+* Nagios is at http://localhost:8080/nagios
 * Nagrestconf is at http://localhost:8880/nagrestconf<br>
   Default credentials: nagrestconfadmin / admin
 
