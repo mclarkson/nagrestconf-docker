@@ -88,8 +88,8 @@ EnD
 export APACHE_ARGUMENTS="-DFOREGROUND"
 
 # Edit sudoers and users
-uid=$(stat $NAGCTL_NAG_DIR --format %u)
-gid=$(stat $NAGCTL_NAG_DIR --format %g)
+uid=$(stat $(find $NAGCTL_NAG_DIR ! -uid 0 | head -1) --format %u)
+gid=$(stat $(find $NAGCTL_NAG_DIR ! -uid 0 | head -1) --format %g)
 groupadd -g $gid nagios
 useradd -u $uid -g $gid nagios -r
 nagrestconf_install -q -o
