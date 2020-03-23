@@ -56,6 +56,8 @@ exit
 
 **QuantumObject/docker-nagios has gone! - leaving this section here in case it returns**
 
+**QuantumObject/docker-nagios has returned!**
+
 Start the Nagios 4.x container
 ( See [QuantumObject/docker-nagios](https://github.com/QuantumObject/docker-nagios)):
 
