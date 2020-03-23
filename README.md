@@ -100,9 +100,7 @@ exit
 
 Create the pod:
 ```
-wget https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/kubernetes/nagios-nagrestconf-allinone.yml
-
-kubectl create -f nagios-nagrestconf-allinone.yml
+kubectl apply -f https://raw.githubusercontent.com/mclarkson/nagrestconf-docker/master/kubernetes/nagios-nagrestconf-allinone.yml
 ```
 
 Get a console on the nagios container:
