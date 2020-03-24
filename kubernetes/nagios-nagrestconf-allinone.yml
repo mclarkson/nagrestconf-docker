@@ -1,3 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nagrestconf-envvars
+data:
+  NAGCTL_NAG_DIR: /usr/local/nagios/etc
+  NAGCTL_NAG_OBJ_DIR: /usr/local/nagios/etc/objects
+  NAGCTL_NAG_CONFIG: /usr/local/nagios/etc/nagios.cfg
+  NAGCTL_COMMANDFILE: /usr/local/nagios/var/rw/nagios.cmd
+  NAGCTL_NAGIOSBIN: /usr/local/nagios/bin/nagios
+  NAGCTL_WWWUSER: www-data
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,19 +41,9 @@ spec:
         image: mclarkson/nagrestconf
         ports:
         - containerPort: 80
-        env:
-        - name: NAGCTL_NAG_DIR
-          value: /usr/local/nagios/etc
-        - name: NAGCTL_NAG_OBJ_DIR
-          value: /usr/local/nagios/etc/objects
-        - name: NAGCTL_NAG_CONFIG
-          value: /usr/local/nagios/etc/nagios.cfg
-        - name: NAGCTL_COMMANDFILE
-          value: /usr/local/nagios/var/rw/nagios.cmd
-        - name: NAGCTL_NAGIOSBIN
-          value: /usr/local/nagios/bin/nagios
-        - name: NAGCTL_WWWUSER
-          value: www-data
+        envFrom:
+        - configMapRef:
+            name: nagrestconf-envvars
         volumeMounts:
         - name: nagios-dir
           mountPath: /usr/local/nagios
